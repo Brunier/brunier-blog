@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react"
 import { TweenMax, TimelineLite } from "gsap"
-import useWindowDimensions from '../hooks/useWindowDimensions'
 
 const getRandomColor = () => {
   var letters = "0123456789ABCDEF"
@@ -12,40 +11,29 @@ const getRandomColor = () => {
 }
 
 const Star = () => {
-  //const { height, width } = useWindowDimensions();
-
   const star = useRef(null)
   const body = useRef(null)
   const eyes = useRef(null)
   
-  let blinkTimeline = null
-  let flipTimeline = null
+  const blinkTimeline = useRef()
+  const flipTimeline = useRef()
 
   const onCompleteFlipTimeLine = () => {
     TweenMax.to(eyes.current, 1, {
       scale: 1,
       transformOrigin: "center center",
     })
-    flipTimeline.reverse()
-    blinkTimeline.resume()
+    flipTimeline.current.reverse()
+    blinkTimeline.current.resume()
   }
 
   useEffect(() => {
-      // TweenMax.fromTo(
-    //   [body.current, eyes.current],
-    //   0.5,
-    //   { y: 18 },
-    //   { y: -18, yoyo: true, repeat: -1 }
-    // )
-    //console.log({ height, width })
-    const test = Math.abs((Math.random() * 300) - 200);
-    //console.log({test})
     TweenMax.to(star.current, 5, {
-      left: test,
-      y: Math.random() * 200,
+      left: Math.abs((Math.random() * 300) - 200),
+      y: Math.random() * 100,
     })
 
-    blinkTimeline = new TimelineLite({ paused: true, repeat: -1, yoyo: true }).to(
+    blinkTimeline.current = new TimelineLite({ paused: true, repeat: -1, yoyo: true }).to(
       eyes.current,
       0.5,
       {
@@ -62,7 +50,7 @@ const Star = () => {
       delay: 1 + Math.random() * 2,
     });
 
-    flipTimeline = new TimelineLite({ paused: true, onComplete: onCompleteFlipTimeLine }).to(
+    flipTimeline.current = new TimelineLite({ paused: true, onComplete: onCompleteFlipTimeLine }).to(
       body.current,
       Math.random() * 5 + 1,
       {
@@ -72,23 +60,17 @@ const Star = () => {
       }
     )
 
-    blinkTimeline.play()
+    blinkTimeline.current.play()
   }, [])
 
   const onHoverBody = () => {
-    // TweenMax.fromTo(
-    //   [body.current, eyes.current],
-    //   0.5,
-    //   { y: 60 },
-    //   { y: -18, yoyo: true, repeat: -1 }
-    // )
     TweenMax.to(eyes.current, 3, {
       scale: 1.3,
       transformOrigin: "center center",
     })
 
-    blinkTimeline.pause()
-    flipTimeline.play()
+    blinkTimeline.current.pause()
+    flipTimeline.current.play()
   }
 
   return (
