@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Normalize from "react-normalize"
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle, ThemeProvider } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -9,12 +9,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+export const theme = {
+  mainColor: "orange", //#6da6e0
+  mainHover: "blue", //#8fc7ff;
+  titleFontFamily: '"Fredoka One", cursive',
+}
+
 const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
       <Normalize />
-      <main>{children}</main>
+      <ThemeProvider theme={theme}>
+        <main>{children}</main>
+      </ThemeProvider>
     </>
   )
 }

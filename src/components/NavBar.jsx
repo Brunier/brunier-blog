@@ -14,7 +14,7 @@ const NavMenu = styled.nav`
 
 const UlMenu = styled.ul`
   list-style: none;
-  color: #6ca6e0;
+  color: ${({ theme: { mainColor } }) => mainColor};
   display: flex;
   justify-content: space-between;
   font-size: 1.3em;
@@ -35,17 +35,17 @@ const MenuItem = styled.li`
       content: "|";
       white-space: nowrap;
       padding: 50px;
-      color: #6ca6e0;
+      color: ${({ theme: { mainColor } }) => mainColor};
     }
   }
 `
 
 const TextMenuExternal = styled.a`
   cursor: pointer;
-  color: #6ca6e0;
+  color: ${({ theme: { mainColor } }) => mainColor};
 
   &:hover {
-    color: #8fc7ff;
+    color: ${({ theme: { mainHover } }) => mainHover};
   }
 
   @media (min-width: 768px) {
@@ -55,10 +55,10 @@ const TextMenuExternal = styled.a`
 
 const TextMenuInternal = styled(props => <Link {...props} />)`
   cursor: pointer;
-  color: #6ca6e0;
+  color: ${({ theme: { mainColor } }) => mainColor};
 
   &:hover {
-    color: #8fc7ff;
+    color: ${({ theme: { mainHover } }) => mainHover};
   }
 
   @media (min-width: 768px) {

@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react"
 import { TweenMax, TimelineLite } from "gsap"
+import { theme } from './Layout';
+
 
 const getRandomColor = () => {
   var letters = "0123456789ABCDEF"
@@ -87,7 +89,7 @@ const Star = () => {
         d="M201.991 287.542q-52.64-21.571-105.164.28t-48.274-34.878q4.25-56.728-32.763-99.93t18.252-56.689q55.266-13.489 84.915-62.04t59.555-.159q29.907 48.393 85.244 61.587t18.554 56.592q-36.782 43.4-32.231 100.1t-48.088 35.137z"
         transform="translate(-.938 -9.969)"
         fillRule="evenodd"
-        fill="#6da6e0"
+        fill={theme.mainColor}
       />
       <path
         ref={eyes}
